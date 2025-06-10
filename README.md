@@ -84,4 +84,9 @@ plaintext -> arquivo no diretorio raiz
 - git reset --soft HEAD~1 - desfaz o seu ultimo commit , porem os arquivos não mudam;
 
 - git reset --hard HEAD~1 - tbm apaga seu ultimo commit , Voltando no tempo;
- 
+
+  ## Scripts
+  1. sincroniza todas as branchs remoto com o local
+  ```bash
+git fetch --all && git branch -r | grep -v '\->' | sed 's/origin\///g' | xargs -I {} sh -c 'if git rev-parse --verify --quiet {} >/dev/null; then git checkout {} && git pull origin {}; else git checkout -b {} origin/{}; fi' && git checkout main 2>/dev/null || git checkout master 2>/dev/null && echo "✅ Todas as branches sincronizadas!"
+   ```
