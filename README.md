@@ -88,5 +88,7 @@ plaintext -> arquivo no diretorio raiz
   ## Scripts
   1. sincroniza todas as branchs remoto com o local
   ```bash
+  
 git fetch --all && git branch -r | grep -v '\->' | sed 's/origin\///g' | xargs -I {} sh -c 'if git rev-parse --verify --quiet {} >/dev/null; then git checkout {} && git pull origin {}; else git checkout -b {} origin/{}; fi' && git checkout main 2>/dev/null || git checkout master 2>/dev/null && echo "✅ Todas as branches sincronizadas!"
+   
    ```
